@@ -1,0 +1,23 @@
+<h1 class="tc"><%=project.title%></h1>
+<% total = 0%>
+<% project.pledges.each do | pledge | %>
+    <% total += pledge.amount %>
+<% end %>
+<h2 class="tc">Goal: £<%=total%> / £<%=project.goal%></h2>
+
+<h3 class="tc">Pledges:</h3>
+<div class="flex flex-column tc">
+    <% project.pledges.each do | pledge | %>
+        <div class="flex flex-column pa3">
+            <div>Username: <%= pledge.user.name %></div>
+            <div>Amount: £<%= pledge.amount %></div>
+        </div>
+    <% end %>
+</div>
+
+<form action="/projects/<%=project.id%>/pledge" class="tc" method="post">
+    <input name="user_id" type="number" value="<%=session[:user].id%>" hidden/>
+    <input name="project_id" type="number" value="<%=project.id%>" hidden/>
+    <input name="amount" type="number" required/>
+    <button type="submit">Give money</button>
+</form>

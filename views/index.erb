@@ -1,0 +1,29 @@
+<section>
+    <div class="tc"> 
+        <h1 class="tc">Projects</h1>
+        <a class="f6 link dim br-pill ph3 pv2 mb2 dib white bg-dark-green tc" href="/projects/new">New Project</a>
+    </div>
+
+    <div class="flex flex-wrap justify-center">
+        <% projects.each do | project | %>
+                <article class="ba pa3 ma3 w5">
+                    <a href="/projects/<%=project.id%>"> 
+                        <h2 class="tc"><%=project.title%></h2>
+                    </a>
+
+                        <% total = 0%>
+                        <% project.pledges.each do | pledge | %>
+                            <% total += pledge.amount %>
+                        <% end %>
+
+                    <p class="tc">£<%=total%> / £<%=project.goal%></p>
+                
+                    <div class="flex justify-between">
+                        <a href="/projects/<%=project.id%>/edit" class="link dim"> <i class="fas fa-edit"></i></a>
+                        <a href="/projects/<%=project.id%>/delete" class="link dim"><i class="fas fa-trash-alt"></i></a>
+                    </div>
+                </article>    
+            
+        <% end %>
+    </div>
+</section>
